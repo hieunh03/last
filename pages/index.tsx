@@ -5,16 +5,21 @@ import Post, { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const feed = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
+  const feed = await prisma.videoPost.findMany({
+    where: {},
+    include: {},
   });
+
+  // Convert Date objects to strings
+  const serializedFeed = feed.map((post) => ({
+    ...post,
+    createdAt: post.createdAt.toISOString(),
+    updatedAt: post.updatedAt.toISOString(),
+  }));
+
+  console.log(feed);
   return {
-    props: { feed },
+    props: { feed: serializedFeed },
     revalidate: 10,
   };
 };

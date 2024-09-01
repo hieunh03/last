@@ -5,21 +5,21 @@ import ReactMarkdown from "react-markdown";
 export type PostProps = {
   id: string;
   title: string;
-  author: {
+  user: {
     name: string;
     email: string;
   } | null;
-  content: string;
-  published: boolean;
+  description: string;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-  const authorName = post.author ? post.author.name : "Unknown author";
+  const userName = post.user ? post.user.name : "Unknown user";
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
+    // <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
+    <div>
       <h2>{post.title}</h2>
-      <small>By {authorName}</small>
-      <ReactMarkdown children={post.content} />
+      <small>By {userName}</small>
+      <ReactMarkdown children={post.description} />
       <style jsx>{`
         div {
           color: inherit;

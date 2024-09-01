@@ -6,12 +6,12 @@ import { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = await prisma.post.findUnique({
+  const post = await prisma.videoPost.findUnique({
     where: {
       id: String(params?.id),
     },
     include: {
-      author: {
+      user: {
         select: { name: true },
       },
     },
@@ -31,8 +31,8 @@ const Post: React.FC<PostProps> = (props) => {
     <Layout>
       <div>
         <h2>{title}</h2>
-        <p>By {props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown children={props.content} />
+        <p>By {props?.user?.name || "Unknown author"}</p>
+        <ReactMarkdown children={props.description} />
       </div>
       <style jsx>{`
         .page {
