@@ -9,7 +9,6 @@ const Header: React.FC = () => {
     router.pathname === pathname;
 
   const { data: session, status } = useSession();
-
   let left = (
     <div className="left">
       <Link legacyBehavior href="/">
@@ -120,9 +119,6 @@ const Header: React.FC = () => {
           <a className="bold" data-active={isActive("/")}>
             Funny Movie
           </a>
-        </Link>
-        <Link legacyBehavior href="/drafts">
-          <a data-active={isActive("/drafts")}>My drafts</a>
         </Link>
         <style jsx>{`
           .bold {

@@ -10,8 +10,6 @@ async function fetchYoutubeVideoData(url: string) {
   if (!videoId) {
     throw new Error('Invalid YouTube URL');
   }
-  console.log('test')
-
   const response = await fetch(
     `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet,contentDetails,statistics&key=${YOUTUBE_API_KEY}`, {
       method: 'GET',
@@ -44,12 +42,14 @@ export default async function handle(req, res) {
   console.log(session)
   const result = await prisma.videoPost.create({
     data: {
-      videoId: url,
+      videoId: videoData.id,
       title: videoData.snippet.title,
       description: videoData.snippet.description,
-      thumbnailUrl: videoData.snippet.thumbnails.high.url,
       authorName: session.user.name,
     },
   });
+
+  req.socket.server.io.emit('newPost', result);
+
   res.json(result);
 }

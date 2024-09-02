@@ -7,7 +7,11 @@ import prisma from "../lib/prisma";
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.videoPost.findMany({
     where: {},
-    include: {},
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
   });
 
   // Convert Date objects to strings
