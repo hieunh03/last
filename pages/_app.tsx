@@ -1,6 +1,5 @@
 import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
-import { useEffect } from 'react';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

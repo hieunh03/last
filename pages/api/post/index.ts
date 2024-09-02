@@ -1,4 +1,3 @@
-import { getSession } from 'next-auth/react';
 import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]';
@@ -48,8 +47,5 @@ export default async function handle(req, res) {
       authorName: session.user.name,
     },
   });
-
-  req.socket.server.io.emit('newPost', result);
-
   res.json(result);
 }

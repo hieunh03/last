@@ -11,7 +11,6 @@ export type PostProps = {
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-  console.log(post);
   return (
     <div className="video-post">
       <iframe

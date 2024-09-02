@@ -21,7 +21,6 @@ export const getStaticProps: GetStaticProps = async () => {
     updatedAt: post.updatedAt.toISOString(),
   }));
 
-  console.log(feed);
   return {
     props: { feed: serializedFeed },
     revalidate: 10,
