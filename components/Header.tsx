@@ -151,7 +151,7 @@ const Header: React.FC = () => {
             <a>New post</a>
           </button>
         </Link>
-        <button onClick={() => signOut()}>
+        <button onClick={() => signOut({ callbackUrl: "/" })}>
           <a>Log out</a>
         </button>
         <style jsx>{`

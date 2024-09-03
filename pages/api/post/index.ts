@@ -1,6 +1,7 @@
 import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]';
+import { errorMonitor } from 'events';
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY; // Make sure to set this in your environment variables
 
@@ -34,18 +35,20 @@ function extractVideoIdFromUrl(url: string): string | null {
 
 // POST /api/post
 export default async function handle(req, res) {
-  const { url } = req.body;
-  console.log(url)
-  const videoData = await fetchYoutubeVideoData(url);
-  const session = await getServerSession(req,res, options);
-  console.log(session)
-  const result = await prisma.videoPost.create({
-    data: {
-      videoId: videoData.id,
-      title: videoData.snippet.title,
-      description: videoData.snippet.description,
-      authorName: session.user.name,
-    },
-  });
-  res.json(result);
+  try {
+    const { url } = req.body;
+    const videoData = await fetchYoutubeVideoData(url);
+    const session = await getServerSession(req, res, options);
+    const result = await prisma.videoPost.create({
+      data: {
+        videoId: videoData.id,
+        title: videoData.snippet.title,
+        description: videoData.snippet.description,
+        authorName: session.user.name,
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message || 'An unxpected error occured' });
+  }
 }

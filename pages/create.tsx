@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router from "next/router";
+import { toast } from "react-toastify";
 
 const Draft: React.FC = () => {
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const body = { url };
-      await fetch("/api/post", {
+      const result = await fetch("/api/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      await Router.push("/");
+      const result_json = await result.json();
+      if (result.status !== 200) {
+        toast.error(result_json.error || "An error occurred");
+      } else {
+        toast.success("Post created successfully");
+        Router.push("/");
+      }
     } catch (error) {
+      toast.error("Internal Server Error");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,7 +44,11 @@ const Draft: React.FC = () => {
             type="text"
             value={url}
           />
-          <input disabled={!url} type="submit" value="Create" />
+          <input
+            disabled={loading}
+            type="submit"
+            value={loading ? "Loading..." : "Create"}
+          />
           <a className="back" href="#" onClick={() => Router.push("/")}>
             Cancel
           </a>
