@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 const App = ({ Component, pageProps }: AppProps) => {
   const handlePayload = (payload: any) => {
     const title = payload.new?.title || "New video post";
-    // add who share
     const user = payload.new?.authorName || "Anonymous";
     toast.info(`${user} shared a new video: ${title}`);
   };
@@ -18,7 +17,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       "postgres_changes",
       { event: "INSERT", schema: "public", table: "VideoPost" },
       (payload) => {
-        console.log(payload)
         handlePayload(payload);
       }
     )

@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -13,7 +15,7 @@ const Header: React.FC = () => {
     <div className="left">
       <Link legacyBehavior href="/">
         <a className="bold" data-active={isActive("/")}>
-          Funny Movie
+          <FontAwesomeIcon icon={faHome} className="home-icon" /> Funny Movie
         </a>
       </Link>
       <style jsx>{`
@@ -45,7 +47,7 @@ const Header: React.FC = () => {
       <div className="left">
         <Link legacyBehavior href="/">
           <a className="bold" data-active={isActive("/")}>
-            Funny Movie
+            <FontAwesomeIcon icon={faHome} className="home-icon" /> Funny Movie
           </a>
         </Link>
         <style jsx>{`
@@ -117,7 +119,7 @@ const Header: React.FC = () => {
       <div className="left">
         <Link legacyBehavior href="/">
           <a className="bold" data-active={isActive("/")}>
-            Funny Movie
+            <FontAwesomeIcon icon={faHome} className="home-icon" /> Funny Movie
           </a>
         </Link>
         <style jsx>{`
