@@ -21,6 +21,7 @@ This is a Next.js application named "Raminato" that fetches YouTube video data, 
 5. Set up the database using Prisma. Run `npx prisma generate` and `npx prisma db push` to create the database schema.
 6. Start the development server using `npm run dev`.
 
+- Note: If you are using Local replace url in schema and run `npx prisma generate`
 ## Usage
 
 - The application fetches YouTube video data using the `fetchYoutubeVideoData` function in `pages/api/post/index.ts`.
