@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
+  // comment suppabase socket for local run 
   const handlePayload = (payload: any) => {
     const title = payload.new?.title || "New video post";
     const user = payload.new?.authorName || "Anonymous";
