@@ -5,7 +5,7 @@ import { errorMonitor } from 'events';
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY; // Make sure to set this in your environment variables
 
-async function fetchYoutubeVideoData(url: string) {
+export async function fetchYoutubeVideoData(url: string) {
   const videoId = extractVideoIdFromUrl(url);
   if (!videoId) {
     throw new Error('Invalid YouTube URL');
@@ -27,7 +27,7 @@ async function fetchYoutubeVideoData(url: string) {
   return data.items[0];
 }
 
-function extractVideoIdFromUrl(url: string): string | null {
+export function extractVideoIdFromUrl(url: string): string | null {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
   return (match && match[2].length === 11) ? match[2] : null;
