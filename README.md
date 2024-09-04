@@ -30,6 +30,11 @@ This is a Next.js application named "Raminato" that fetches YouTube video data, 
 - The application uses server-side rendering and client-side navigation provided by Next.js.
 - The application uses CSS inline.
 
+## Testing
+
+- The application includes unit tests for the function in `pages/api/post/index.ts`.
+- Run `npm test` to execute the tests.
+
 ## Dependencies
 
 - Next.js
