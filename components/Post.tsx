@@ -63,6 +63,29 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
           font-size: 14px;
           color: #333;
         }
+
+        @media (max-width: 600px) {
+          .video-post {
+            flex-direction: column;
+            align-items: center;
+          }
+          .video-frame {
+            width: 100%;
+            height: auto;
+            margin-right: 0;
+          }
+          .post-content {
+            width: 100%;
+            margin-top: 10px;
+          }
+          .movie-title {
+            font-size: 18px;
+          }
+          .shared-by,
+          .description {
+            font-size: 12px;
+          }
+        }
       `}</style>
     </div>
   );
